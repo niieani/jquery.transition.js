@@ -89,6 +89,8 @@ Object.size = function(obj) {
     return size;
 };
 
+var geckoVer = geckoGetRv();
+
 (function($, window, document, undefined) {
 
 var div = document.createElement("div"),
@@ -120,11 +122,11 @@ while ( i-- ) {
 if(geckoVer < 2 && geckoVer >= 0)
 {
     supportTransition = false;
+    oldGecko = true;
 }
 
 if ( !supportTransition ) {
 
-    var geckoVer = geckoGetRv();
 
 	$(function() {
 		var docSS = document.styleSheets,
@@ -137,7 +139,7 @@ if ( !supportTransition ) {
 			selector,
             docFF = {};
 
-            if(geckoVer < 2 && geckoVer > 0)
+            if(oldGecko == true)
             {
                 // List stylesheets for FF (manualy parsing CSS from files, docSS doesn't support custom values, it's a FF >= 3.6 bug)
                 var lnks    = document.getElementsByTagName('link');
@@ -163,7 +165,7 @@ if ( !supportTransition ) {
 			// if the stylesheet gives us security issues and is readOnly, exit here
 			//if ( docSS[i].readOnly ) { continue };
 
-            if(geckoVer < 2 && geckoVer > 0)
+            if(oldGecko == true)
             {
                 // adding inline styles from <style> for FF
                 var inline = document.getElementsByTagName("style");
@@ -185,7 +187,7 @@ if ( !supportTransition ) {
 			// Loop through all rules
 			while ( j-- ) {
 				curRule = rules[j];
-                if(geckoVer < 2 && geckoVer > 0)
+                if(oldGecko == true)
                 {
                     curSelectorText = curRule.mSelectorText;
 
@@ -212,7 +214,7 @@ if ( !supportTransition ) {
 				k = selectors.length;
 
 				if ( transition ) {
-                    if(geckoVer < 2 && geckoVer > 0)
+                    if(oldGecko == true)
                     {
                         if(curRule.declarations)
                             duration = searchForProperty("transition-duration", curRule.declarations);
@@ -246,7 +248,7 @@ if ( !supportTransition ) {
 					);
                     if ( split.length > 1 )
                     {
-                        if(geckoVer < 2 && geckoVer > 0)
+                        if(oldGecko == true)
                         {
                         // store selectors at the same place when they exist for both :hover and :focus
                         (pseudo == ":hover" || pseudo == ":focus") && pseudoSelector[split.join("")] ?
@@ -299,7 +301,7 @@ if ( !supportTransition ) {
 
 				while ( i-- ) {
 
-                    if(geckoVer < 2 && geckoVer > 0)
+                    if(oldGecko == true)
                     {
                         var temppropdata = camelCase(properties[i]);
                         props[properties[i]] = searchForPropertyCamel(temppropdata, temp.style);
@@ -314,7 +316,7 @@ if ( !supportTransition ) {
                     }
 				}
 
-                if(geckoVer < 2 && geckoVer > 0)
+                if(oldGecko == true)
                 {
                     // remove the rule from the CSS to fix a race condition in FF
                     docSS[id[0]].deleteRule(id[1]);
