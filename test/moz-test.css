@@ -1,0 +1,21 @@
+p
+{
+    font-size: 20px;
+    -moz-unsupported-test: 200ms;
+}
+
+li {
+    font-size:12px;
+  bottom: 0;
+  -moz-transition: padding-bottom 500ms, font-size 500ms;
+  -webkit-transition: padding-bottom 500ms, font-size 500ms;
+  -o-transition: padding-bottom 500ms, font-size 500ms;
+  transition-property: padding-bottom, font-size;
+  transition-duration: 500ms;
+}
+
+li:hover {
+  bottom: 40px;
+  padding-bottom: 50px;
+  font-size: 20px;
+}
